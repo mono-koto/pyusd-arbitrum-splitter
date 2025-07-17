@@ -7,6 +7,8 @@ on:
 
 env:
   FOUNDRY_PROFILE: ci
+  PYUSD_ARB_SEPOLIA: "0x637A1259C6afd7E3AdF63993cA7E58BB438aB1B1"
+  ARBITRUM_SEPOLIA_RPC_URL: "https://sepolia-rollup.arbitrum.io/rpc"
 
 jobs:
   check:
