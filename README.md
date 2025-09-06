@@ -2,6 +2,8 @@
 
 A simplified smart contract for splitting ERC20 tokens (like PYUSD) among multiple recipients based on predefined shares. This project demonstrates smart contract development practices and provides a clean educational example for PYUSD integration on Arbitrum.
 
+**✨ NEW: Factory Pattern for Frontend Integration** - The repo now includes `SimpleSplitterCloneable` and `SimpleSplitterFactory` contracts that enable cheap, gas-efficient deployment of splitters via a factory pattern, perfect for frontend applications.
+
 ## What Does SimpleSplitter Do? 🤔
 
 Think of SimpleSplitter like an automated accountant for splitting money:
@@ -39,6 +41,7 @@ Instead of manually calculating splits every day, SimpleSplitter:
 - Testing (unit tests and fork tests)
 - Deployment to Arbitrum testnet
 - Security patterns for token handling
+- Factory pattern for cheap contract cloning (perfect for frontends)
 
 ### What This Repo Does Not Cover:
 
