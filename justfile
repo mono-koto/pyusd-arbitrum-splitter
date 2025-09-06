@@ -78,25 +78,14 @@ splitter-distribute splitter_address:
         --rpc-url arbitrum_sepolia \
         --private-key "$PRIVATE_KEY" 
 
-# Deploy SimpleSplitterCloneable implementation to Arbitrum testnet
-implementation-deploy token=pyusd_sepolia:
-    forge create src/SimpleSplitterCloneable.sol:SimpleSplitterCloneable \
+# Deploy factory pattern (implementation + factory) - auto-detects PYUSD based on network
+factory-deploy:
+    forge script script/DeployFactory.s.sol \
         --broadcast \
         --verify \
         --verifier etherscan \
         --rpc-url arbitrum_sepolia \
-        --private-key "$PRIVATE_KEY" \
-        --constructor-args "{{token}}"
-
-# Deploy SimpleSplitterFactory to Arbitrum testnet
-factory-deploy implementation_address:
-    forge create src/SimpleSplitterFactory.sol:SimpleSplitterFactory \
-        --broadcast \
-        --verify \
-        --verifier etherscan \
-        --rpc-url arbitrum_sepolia \
-        --private-key "$PRIVATE_KEY" \
-        --constructor-args "{{implementation_address}}"
+        --private-key "$PRIVATE_KEY"
 
 # Create a new splitter via factory
 factory-create-splitter factory_address recipients shares:
