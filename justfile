@@ -31,6 +31,10 @@ test-verbose:
 test-unit:
     forge test --match-contract SimpleSplitterTest
 
+# Run cloneable tests
+test-cloneable:
+    forge test --match-contract SimpleSplitterCloneableTest
+
 # Run only fork tests
 test-fork:
     forge test --match-contract SimpleSplitterForkTest
@@ -73,6 +77,33 @@ splitter-distribute splitter_address:
     cast send {{splitter_address}} "distribute()" \
         --rpc-url arbitrum_sepolia \
         --private-key "$PRIVATE_KEY" 
+
+# Deploy SimpleSplitterCloneable implementation to Arbitrum testnet
+implementation-deploy token=pyusd_sepolia:
+    forge create src/SimpleSplitterCloneable.sol:SimpleSplitterCloneable \
+        --broadcast \
+        --verify \
+        --verifier etherscan \
+        --rpc-url arbitrum_sepolia \
+        --private-key "$PRIVATE_KEY" \
+        --constructor-args "{{token}}"
+
+# Deploy SimpleSplitterFactory to Arbitrum testnet
+factory-deploy implementation_address:
+    forge create src/SimpleSplitterFactory.sol:SimpleSplitterFactory \
+        --broadcast \
+        --verify \
+        --verifier etherscan \
+        --rpc-url arbitrum_sepolia \
+        --private-key "$PRIVATE_KEY" \
+        --constructor-args "{{implementation_address}}"
+
+# Create a new splitter via factory
+factory-create-splitter factory_address recipients shares:
+    cast send {{factory_address}} "createSplitter(address[],uint256[])" "[{{recipients}}]" "[{{shares}}]" \
+        --rpc-url arbitrum_sepolia \
+        --private-key "$PRIVATE_KEY"
+
 
 # Generate a new wallet for deployment
 generate-wallet:

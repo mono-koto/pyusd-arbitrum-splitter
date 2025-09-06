@@ -8,7 +8,7 @@ import {MockToken} from "../src/MockToken.sol";
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 contract SimpleSplitterTest is Test {
-    SimpleSplitter public splitter;
+    ISimpleSplitter public splitter;
     MockToken public token;
 
     address public alice = address(0x1);
@@ -21,7 +21,7 @@ contract SimpleSplitterTest is Test {
     event TokensDistributed(uint256 totalAmount);
     event RecipientPaid(address indexed recipient, uint256 amount);
 
-    function setUp() public {
+    function setUp() public virtual {
         // Deploy MockToken
         token = new MockToken("Mock PYUSD", "MPYUSD");
 
@@ -35,7 +35,7 @@ contract SimpleSplitterTest is Test {
         shares.push(20);
 
         // Deploy SimpleSplitter
-        splitter = new SimpleSplitter(IERC20(token), recipients, shares);
+        splitter = ISimpleSplitter(address(new SimpleSplitter(IERC20(token), recipients, shares)));
     }
 
     /* //////////////////////////////////////////////////////////////////////// 
