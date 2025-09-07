@@ -3,7 +3,8 @@ pragma solidity 0.8.30;
 
 import {SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import {ReentrancyGuardTransientUpgradeable} from "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardTransientUpgradeable.sol";
+import {ReentrancyGuardTransientUpgradeable} from
+    "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardTransientUpgradeable.sol";
 import {Initializable} from "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import {ISimpleSplitter} from "./ISimpleSplitter.sol";
 
@@ -61,7 +62,7 @@ contract SimpleSplitterCloneable is ISimpleSplitter, Initializable, ReentrancyGu
             revert ZeroAddressRecipient();
         }
         token = _token;
-        
+
         // Disable initializers for the implementation contract
         _disableInitializers();
     }
@@ -78,7 +79,7 @@ contract SimpleSplitterCloneable is ISimpleSplitter, Initializable, ReentrancyGu
      */
     function initialize(address[] memory _recipients, uint256[] memory _shares) external initializer {
         __ReentrancyGuardTransient_init();
-        
+
         if (_recipients.length != _shares.length) {
             revert RecipientShareLengthMismatch();
         }

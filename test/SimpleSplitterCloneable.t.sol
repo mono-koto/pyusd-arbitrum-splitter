@@ -18,12 +18,7 @@ contract SimpleSplitterCloneableTest is SimpleSplitterTest {
     SimpleSplitterFactory public factory;
     SimpleSplitterCloneable public implementation;
 
-    event SplitterCreated(
-        address indexed splitter,
-        address indexed creator,
-        address[] recipients,
-        uint256[] shares
-    );
+    event SplitterCreated(address indexed splitter, address indexed creator, address[] recipients, uint256[] shares);
 
     function setUp() public override {
         // Deploy MockToken (same as parent)
@@ -40,7 +35,7 @@ contract SimpleSplitterCloneableTest is SimpleSplitterTest {
 
         // Deploy implementation first
         implementation = new SimpleSplitterCloneable(IERC20(token));
-        
+
         // Deploy factory with implementation address
         factory = new SimpleSplitterFactory(address(implementation));
 
@@ -61,7 +56,7 @@ contract SimpleSplitterCloneableTest is SimpleSplitterTest {
     function test_factory_createSplitter_success() public {
         address[] memory newRecipients = new address[](2);
         uint256[] memory newShares = new uint256[](2);
-        
+
         newRecipients[0] = alice;
         newRecipients[1] = bob;
         newShares[0] = 60;
@@ -72,9 +67,9 @@ contract SimpleSplitterCloneableTest is SimpleSplitterTest {
         emit SplitterCreated(address(0), address(this), newRecipients, newShares);
 
         address newSplitter = factory.createSplitter(newRecipients, newShares);
-        
+
         ISimpleSplitter splitterInstance = ISimpleSplitter(newSplitter);
-        
+
         assertEq(address(splitterInstance.token()), address(token));
         assertEq(splitterInstance.totalShares(), 100);
         assertEq(splitterInstance.recipientCount(), 2);
@@ -124,7 +119,7 @@ contract SimpleSplitterCloneableTest is SimpleSplitterTest {
         // Test empty recipients
         address[] memory emptyRecipients = new address[](0);
         uint256[] memory emptyShares = new uint256[](0);
-        
+
         vm.expectRevert(ISimpleSplitter.NoRecipients.selector);
         factory.createSplitter(emptyRecipients, emptyShares);
 
@@ -172,7 +167,7 @@ contract SimpleSplitterCloneableTest is SimpleSplitterTest {
     function test_clone_cannotBeInitializedTwice() public {
         // Try to initialize our existing clone again (should fail)
         SimpleSplitterCloneable cloneInstance = SimpleSplitterCloneable(address(splitter));
-        
+
         vm.expectRevert();
         cloneInstance.initialize(recipients, shares);
     }
@@ -181,24 +176,24 @@ contract SimpleSplitterCloneableTest is SimpleSplitterTest {
         // Create two clones
         address splitter1 = factory.createSplitter(recipients, shares);
         address splitter2 = factory.createSplitter(recipients, shares);
-        
+
         // Both should have the same implementation
         SimpleSplitterCloneable clone1 = SimpleSplitterCloneable(splitter1);
         SimpleSplitterCloneable clone2 = SimpleSplitterCloneable(splitter2);
-        
+
         assertEq(address(clone1.token()), address(clone2.token()));
         assertTrue(splitter1 != splitter2); // Different addresses
-        
+
         // But same implementation logic (both should work identically)
         token.mint(splitter1, 1000e6);
         token.mint(splitter2, 2000e6);
-        
+
         clone1.distribute();
         clone2.distribute();
-        
+
         // Verify proportional distribution worked for both
         assertEq(token.balanceOf(alice), 500e6 + 1000e6); // 50% of each
-        assertEq(token.balanceOf(bob), 300e6 + 600e6);     // 30% of each
+        assertEq(token.balanceOf(bob), 300e6 + 600e6); // 30% of each
         assertEq(token.balanceOf(charlie), 200e6 + 400e6); // 20% of each
     }
 

@@ -26,12 +26,7 @@ contract SimpleSplitterFactory {
      * @param recipients The array of recipient addresses.
      * @param shares The array of corresponding shares.
      */
-    event SplitterCreated(
-        address indexed splitter,
-        address indexed creator,
-        address[] recipients,
-        uint256[] shares
-    );
+    event SplitterCreated(address indexed splitter, address indexed creator, address[] recipients, uint256[] shares);
 
     /* ////////////////////////////////////////////////////////////////////////
                                     Immutable State
@@ -41,7 +36,6 @@ contract SimpleSplitterFactory {
      * @notice The address of the SimpleSplitterCloneable implementation contract.
      */
     address public immutable implementation;
-
 
     /* //////////////////////////////////////////////////////////////////////// 
                                     Constructor
@@ -66,18 +60,17 @@ contract SimpleSplitterFactory {
      * @param _shares The corresponding shares of each recipient.
      * @return splitter The address of the newly created splitter clone.
      */
-    function createSplitter(
-        address[] calldata _recipients,
-        uint256[] calldata _shares
-    ) external returns (address splitter) {
+    function createSplitter(address[] calldata _recipients, uint256[] calldata _shares)
+        external
+        returns (address splitter)
+    {
         // Create the clone
         splitter = implementation.clone();
-        
+
         // Initialize the clone (this will revert with appropriate errors if validation fails)
         SimpleSplitterCloneable(splitter).initialize(_recipients, _shares);
 
         // Emit event
         emit SplitterCreated(splitter, msg.sender, _recipients, _shares);
     }
-
 }

@@ -17,7 +17,7 @@ contract DeployFactory is Script {
     function run() external returns (SimpleSplitterFactory factory) {
         uint256 chainId = block.chainid;
         (address tokenAddress, string memory networkName) = getNetworkInfo(chainId);
-        
+
         console.log("Deploying SimpleSplitter Factory Pattern to network...");
         console.log("Chain ID:", chainId);
         console.log("Network:", networkName);
@@ -59,8 +59,7 @@ contract DeployFactory is Script {
         // Anvil/Local (for testing)
         else if (chainId == 31337) {
             return (0x637A1259C6afd7E3AdF63993cA7E58BB438aB1B1, "Local Anvil");
-        }
-        else {
+        } else {
             revert(string(abi.encodePacked("Unsupported chain ID: ", vm.toString(chainId))));
         }
     }
