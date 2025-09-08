@@ -9,7 +9,7 @@ import { http } from 'viem'
 const projectId = import.meta.env.VITE_WALLET_CONNECT_PROJECT_ID || 'your-project-id'
 
 // 2. Set the networks with proper typing
-const networks: [AppKitNetwork, ...AppKitNetwork[]] = [arbitrumSepolia, arbitrum]
+const networks: [AppKitNetwork, ...AppKitNetwork[]] = [arbitrum, arbitrumSepolia]
 
 // 3. Create a metadata object - optional
 const metadata = {
@@ -32,15 +32,16 @@ const wagmiAdapter = new WagmiAdapter({
 
 // 5. Create modal
 createAppKit({
+  defaultNetwork: arbitrum,
   adapters: [wagmiAdapter],
   networks,
   projectId,
   metadata,
   features: {
     analytics: true,
-    swaps: false,
-    onramp: false 
-  }
+    onramp: true,
+    swaps: true,
+ }
 })
 
 export { wagmiAdapter }
