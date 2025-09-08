@@ -1,53 +1,57 @@
-import { 
-  Title, 
-  Text, 
-  Button, 
-  Card, 
-  Stack, 
+import {
+  Title,
+  Text,
+  Button,
+  Card,
+  Stack,
   Group,
   Badge,
   Alert,
-  Box
-} from '@mantine/core'
-import { Link } from 'react-router-dom'
-import { useAccount, useChainId } from 'wagmi'
-import { useAppKit } from '@reown/appkit/react'
-import { notifications } from '@mantine/notifications'
-import { IconArrowRight, IconInfoCircle, IconWallet } from '@tabler/icons-react'
+  Box,
+} from "@mantine/core";
+import { Link } from "react-router-dom";
+import { useAccount, useChainId } from "wagmi";
+import { useAppKit } from "@reown/appkit/react";
+import { notifications } from "@mantine/notifications";
+import {
+  IconArrowRight,
+  IconInfoCircle,
+  IconWallet,
+} from "@tabler/icons-react";
 
 export function HomePage() {
-  const { isConnected, address } = useAccount()
-  const chainId = useChainId()
-  const { open } = useAppKit()
-  
-  const isArbitrumSepolia = chainId === 421614
-  const isArbitrumOne = chainId === 42161
+  const { isConnected, address } = useAccount();
+  const chainId = useChainId();
+  const { open } = useAppKit();
+
+  const isArbitrumSepolia = chainId === 421614;
+  const isArbitrumOne = chainId === 42161;
 
   const handleWalletConnect = async () => {
     try {
-      open({ view: 'Connect' })
+      open({ view: "Connect" });
     } catch (error) {
-      console.error('Failed to open wallet connect modal:', error)
+      console.error("Failed to open wallet connect modal:", error);
       notifications.show({
-        title: 'Connection Error',
-        message: 'Failed to open wallet connection. Please try again.',
-        color: 'red',
-      })
+        title: "Connection Error",
+        message: "Failed to open wallet connection. Please try again.",
+        color: "red",
+      });
     }
-  }
+  };
 
   const handleNetworkSwitch = async () => {
     try {
-      open({ view: 'Networks' })
+      open({ view: "Networks" });
     } catch (error) {
-      console.error('Failed to open network switch modal:', error)
+      console.error("Failed to open network switch modal:", error);
       notifications.show({
-        title: 'Network Error',
-        message: 'Failed to open network selection. Please try again.',
-        color: 'red',
-      })
+        title: "Network Error",
+        message: "Failed to open network selection. Please try again.",
+        color: "red",
+      });
     }
-  }
+  };
 
   return (
     <Stack gap="xl" mt="xl">
@@ -57,31 +61,35 @@ export function HomePage() {
           PYUSD SimpleSplitter
         </Title>
         <Text size="lg" c="dimmed" mb="xl">
-          Create transparent, gas-efficient token splitters for PYUSD on Arbitrum.
-          Perfect for revenue sharing, payments, and group expenses.
+          Create transparent, gas-efficient token splitters for PYUSD on
+          Arbitrum. Perfect for revenue sharing, payments, and group expenses.
         </Text>
-        
-        {!isConnected && (
-          <Alert 
-            variant="light" 
-            color="blue" 
-            title="Connect your wallet to get started"
-            icon={<IconWallet size={16} />}
-            mb="xl"
-          >
-            Connect your wallet to create and manage PYUSD splitters
-          </Alert>
-        )}
 
-        {isConnected && !isArbitrumSepolia && !isArbitrumOne && (
-          <Alert 
-            variant="light" 
-            color="orange" 
-            title="Switch to Arbitrum network"
+        {/* Network Info */}
+        {isConnected && (
+          <Alert
+            variant="light"
+            color="gray"
             icon={<IconInfoCircle size={16} />}
-            mb="xl"
           >
-            Please switch to Arbitrum One (mainnet) or Arbitrum Sepolia (testnet) to use the splitter
+            <Group justify="space-between">
+              <div>
+                <Text size="sm" fw={500}>
+                  Connected: {address}
+                </Text>
+                <Text size="xs" c="dimmed">
+                  Network:{" "}
+                  {isArbitrumSepolia
+                    ? "Arbitrum Sepolia (Testnet)"
+                    : isArbitrumOne
+                    ? "Arbitrum One (Mainnet)"
+                    : "Unsupported Network"}
+                </Text>
+              </div>
+              {(isArbitrumSepolia || isArbitrumOne) && (
+                <Badge color="green">Ready</Badge>
+              )}
+            </Group>
           </Alert>
         )}
       </Box>
@@ -96,8 +104,8 @@ export function HomePage() {
             </Badge>
           </Group>
           <Text size="sm" c="dimmed">
-            Set up a new splitter by defining recipients and their 
-            percentage shares. Each splitter is a minimal proxy contract.
+            Set up a new splitter by defining recipients and their percentage
+            shares. Each splitter is a minimal proxy contract.
           </Text>
         </Card>
 
@@ -109,8 +117,8 @@ export function HomePage() {
             </Badge>
           </Group>
           <Text size="sm" c="dimmed">
-            Anyone can send PYUSD tokens to your splitter contract.
-            The tokens will accumulate until distribution is triggered.
+            Anyone can send PYUSD tokens to your splitter contract. The tokens
+            will accumulate until distribution is triggered.
           </Text>
         </Card>
 
@@ -122,8 +130,8 @@ export function HomePage() {
             </Badge>
           </Group>
           <Text size="sm" c="dimmed">
-            Call the distribute function to automatically split all 
-            accumulated PYUSD according to the predefined percentages.
+            Call the distribute function to automatically split all accumulated
+            PYUSD according to the predefined percentages.
           </Text>
         </Card>
       </Group>
@@ -136,7 +144,7 @@ export function HomePage() {
         <Text mb="xl" c="dimmed">
           Set up automatic PYUSD distribution to multiple recipients
         </Text>
-        
+
         {isConnected && (isArbitrumSepolia || isArbitrumOne) ? (
           <Button
             component={Link}
@@ -165,25 +173,6 @@ export function HomePage() {
           </Button>
         )}
       </Card>
-
-      {/* Network Info */}
-      {isConnected && (
-        <Alert variant="light" color="gray" icon={<IconInfoCircle size={16} />}>
-          <Group justify="space-between">
-            <div>
-              <Text size="sm" fw={500}>Connected: {address}</Text>
-              <Text size="xs" c="dimmed">
-                Network: {isArbitrumSepolia ? 'Arbitrum Sepolia (Testnet)' : 
-                         isArbitrumOne ? 'Arbitrum One (Mainnet)' : 
-                         'Unsupported Network'}
-              </Text>
-            </div>
-            {(isArbitrumSepolia || isArbitrumOne) && (
-              <Badge color="green">Ready</Badge>
-            )}
-          </Group>
-        </Alert>
-      )}
     </Stack>
-  )
+  );
 }
