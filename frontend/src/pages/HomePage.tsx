@@ -8,6 +8,7 @@ import {
   Badge,
   Alert,
   Box,
+  Flex,
 } from "@mantine/core";
 import { Link } from "react-router-dom";
 import { useAccount, useChainId } from "wagmi";
@@ -60,7 +61,7 @@ export function HomePage() {
         <Title order={1} size="h1" mb="md">
           PYUSD SimpleSplitter
         </Title>
-        <Text size="lg" c="dimmed" mb="xl">
+        <Text size="lg" c="dimmed" mb="xl" mx="auto" maw={600}>
           Simple, transparent, efficient PYUSD splitter on Arbitrum. Use it for
           revenue sharing, payments, and group expenses.
         </Text>
@@ -95,7 +96,7 @@ export function HomePage() {
       </Box>
 
       {/* How It Works */}
-      <Group grow align="stretch">
+      <Flex align="stretch" gap="md" direction={{ base: "column", sm: "row" }}>
         <Card shadow="sm" padding="lg" radius="md" withBorder>
           <Group justify="space-between" mb="xs">
             <Text fw={500}>1. Create Splitter</Text>
@@ -134,7 +135,7 @@ export function HomePage() {
             PYUSD according to the predefined percentages.
           </Text>
         </Card>
-      </Group>
+      </Flex>
 
       {/* Action Section */}
       <Card shadow="sm" padding="xl" radius="md" withBorder ta="center">

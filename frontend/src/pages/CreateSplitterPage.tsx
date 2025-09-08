@@ -15,6 +15,7 @@ import {
   Divider,
   Box,
   Progress,
+  Flex,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { notifications } from "@mantine/notifications";
@@ -280,7 +281,7 @@ export function CreateSplitterPage() {
 
       <Card
         shadow="sm"
-        padding="xl"
+        padding="lg"
         radius="md"
         withBorder
         maw={600}
@@ -295,12 +296,12 @@ export function CreateSplitterPage() {
 
             {form.values.recipients.map((_, index) => (
               <Card key={index} padding="md" withBorder>
-                <Group align="flex-start" gap="md">
+                <Flex align="flex-start" gap="md" direction={{ base: "column", sm: "row" }} maw="100%">
                   <TextInput
                     label={`Recipient ${index + 1} Address`}
                     placeholder="0x..."
                     {...form.getInputProps(`recipients.${index}.address`)}
-                    style={{ flex: 2 }}
+                    style={{ flex: 2, width: "100%" }}
                   />
                   <NumberInput
                     label="Share (%)"
@@ -308,7 +309,7 @@ export function CreateSplitterPage() {
                     min={1}
                     max={100}
                     {...form.getInputProps(`recipients.${index}.share`)}
-                    style={{ flex: 1 }}
+                    style={{ flex: 1, width: "100%" }}
                   />
                   {form.values.recipients.length > 2 && (
                     <ActionIcon
@@ -320,7 +321,7 @@ export function CreateSplitterPage() {
                       <IconTrash size={18} />
                     </ActionIcon>
                   )}
-                </Group>
+                </Flex>
               </Card>
             ))}
 
