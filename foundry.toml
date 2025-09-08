@@ -5,4 +5,4 @@ libs = ["lib"]
 
 [rpc_endpoints]
 arbitrum_sepolia = "${ARBITRUM_SEPOLIA_RPC_URL}"
-
+arbitrum = "${ARBITRUM_ONE_RPC_URL}"

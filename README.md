@@ -39,17 +39,16 @@ Instead of manually calculating splits every day, SimpleSplitter:
 - A practical smart contract example with real-world use case
 - Development workflow with Foundry
 - Testing (unit tests and fork tests)
-- Deployment to Arbitrum testnet
+- Deployment to Arbitrum testnet (sepoloia) and mainnet (one)
 - Security patterns for token handling
 - Factory pattern for cheap contract cloning (perfect for frontends)
+- A working, deployed frontend
 
 ### What This Repo Does Not Cover:
 
 - Solidity concepts (inheritance, libraries, etc.)
 - Full PYUSD token standards or implementation details
 - Production-grade security practices (this is a simplified example)
-- Front-end integration (this is a back-end contract only)
-- Deployment to mainnet (this is focused on Arbitrum Sepolia testnet)
 
 ## Smart Contract Basics 🧠
 
@@ -410,6 +409,22 @@ just test-fork
 # Get all available commands
 just help
 ```
+
+### Network Configuration
+
+By default, all commands use Arbitrum Sepolia testnet. To switch networks:
+
+```bash
+# Use default (Arbitrum Sepolia)
+just splitter-deploy "0xAddr1,0xAddr2" "50,50"
+
+# Use Arbitrum mainnet
+just rpc=arbitrum splitter-deploy "0xAddr1,0xAddr2" "50,50"
+```
+
+The `rpc` variable can be set to any RPC endpoint defined in `foundry.toml`:
+- `arbitrum_sepolia` (default)
+- `arbitrum`
 
 ## Next Steps
 
