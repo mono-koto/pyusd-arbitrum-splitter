@@ -61,8 +61,8 @@ export function HomePage() {
           PYUSD SimpleSplitter
         </Title>
         <Text size="lg" c="dimmed" mb="xl">
-          Create transparent, gas-efficient token splitters for PYUSD on
-          Arbitrum. Perfect for revenue sharing, payments, and group expenses.
+          Simple, transparent, efficient PYUSD splitter on Arbitrum. Use it for
+          revenue sharing, payments, and group expenses.
         </Text>
 
         {/* Network Info */}

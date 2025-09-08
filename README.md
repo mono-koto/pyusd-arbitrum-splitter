@@ -2,7 +2,7 @@
 
 A simplified smart contract for splitting ERC20 tokens (like PYUSD) among multiple recipients based on predefined shares. This project demonstrates smart contract development practices and provides a clean educational example for PYUSD integration on Arbitrum.
 
-**✨ NEW: Factory Pattern for Frontend Integration** - The repo now includes `SimpleSplitterCloneable` and `SimpleSplitterFactory` contracts that enable cheap, gas-efficient deployment of splitters via a factory pattern, perfect for frontend applications.
+**✨ NEW: Factory Pattern for Frontend Integration** - The repo now includes `SimpleSplitterCloneable` and `SimpleSplitterFactory` contracts that enable cheap, gas-efficient deployment of splitters via a factory pattern.
 
 ## What Does SimpleSplitter Do? 🤔
 
@@ -68,7 +68,7 @@ Before diving in, here are key concepts you'll encounter:
 
 **Arbitrum**: A "Layer 2" network that is built on top of Ethereum, but is faster and cheaper to use. [Arbitrum Documentation](https://docs.arbitrum.io/) | [Arbitrum Portal](https://arbitrum.io/)
 
-**Testnet**: A practice version of the blockchain where you can experiment without real money. Perfect for learning! [Ethereum.org Testnets Guide](https://ethereum.org/en/developers/docs/networks/#testnets)
+**Testnet**: A practice version of the blockchain where you can experiment without real. [Ethereum.org Testnets Guide](https://ethereum.org/en/developers/docs/networks/#testnets)
 
 **Mainnet**: The real blockchain where actual money is involved. We won't touch this in this tutorial, but with a few config changes, you could deploy to mainnet just as easily as testnet.
 
@@ -423,17 +423,17 @@ just rpc=arbitrum splitter-deploy "0xAddr1,0xAddr2" "50,50"
 ```
 
 The `rpc` variable can be set to any RPC endpoint defined in `foundry.toml`:
+
 - `arbitrum_sepolia` (default)
 - `arbitrum`
 
 ## Next Steps
 
 You can go deeper with Foundry and smart contract development. Explore Foundry's other features such as
+
 - [Scripting](https://getfoundry.sh/guides/scripting-with-solidity) (which allows you to write scripts in Solidity to automate tasks)
 - [Running a local dev node with Anvil](https://getfoundry.sh/guides/forking-mainnet-with-cast-anvil)
 - [Tracking gas usage](https://getfoundry.sh/forge/gas-tracking/overview)
- 
-
 
 ## License
 
