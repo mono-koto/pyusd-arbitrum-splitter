@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0070ba" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <defs>
+    <linearGradient id="pyusdGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#003087;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0070ba;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle with PYUSD gradient -->
+  <circle cx="12" cy="12" r="11" fill="url(#pyusdGradient)" stroke="#ffffff" stroke-width="0.5"/>
+  
+  <!-- Split arrows icon with white stroke for contrast -->
+  <g stroke="#ffffff" stroke-width="1.5">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+    <path d="M21 17h-8l-3.5 -5h-6.5" />
+    <path d="M21 7h-8l-3.495 5" />
+    <path d="M18 10l3 -3l-3 -3" />
+    <path d="M18 20l3 -3l-3 -3" />
+  </g>
+</svg>
