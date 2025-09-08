@@ -86,44 +86,44 @@ export function HomePage() {
         )}
       </Box>
 
-      {/* Features Cards */}
+      {/* How It Works */}
       <Group grow align="stretch">
         <Card shadow="sm" padding="lg" radius="md" withBorder>
           <Group justify="space-between" mb="xs">
-            <Text fw={500}>Gas Efficient</Text>
-            <Badge color="green" variant="light">
-              ~2,100 gas
-            </Badge>
-          </Group>
-          <Text size="sm" c="dimmed">
-            Uses OpenZeppelin Clones for minimal proxy deployment,
-            making splitter creation extremely cost-effective.
-          </Text>
-        </Card>
-
-        <Card shadow="sm" padding="lg" radius="md" withBorder>
-          <Group justify="space-between" mb="xs">
-            <Text fw={500}>Transparent</Text>
+            <Text fw={500}>1. Create Splitter</Text>
             <Badge color="blue" variant="light">
-              On-chain
+              Deploy
             </Badge>
           </Group>
           <Text size="sm" c="dimmed">
-            All splitter logic is deployed on Arbitrum with
-            verified contracts. No hidden fees or surprises.
+            Set up a new splitter by defining recipients and their 
+            percentage shares. Each splitter is a minimal proxy contract.
           </Text>
         </Card>
 
         <Card shadow="sm" padding="lg" radius="md" withBorder>
           <Group justify="space-between" mb="xs">
-            <Text fw={500}>Easy to Use</Text>
-            <Badge color="violet" variant="light">
-              Simple
+            <Text fw={500}>2. Send PYUSD</Text>
+            <Badge color="green" variant="light">
+              Transfer
             </Badge>
           </Group>
           <Text size="sm" c="dimmed">
-            Create splitters with just recipient addresses and
-            their percentage shares. Send tokens and distribute automatically.
+            Anyone can send PYUSD tokens to your splitter contract.
+            The tokens will accumulate until distribution is triggered.
+          </Text>
+        </Card>
+
+        <Card shadow="sm" padding="lg" radius="md" withBorder>
+          <Group justify="space-between" mb="xs">
+            <Text fw={500}>3. Distribute</Text>
+            <Badge color="violet" variant="light">
+              Split
+            </Badge>
+          </Group>
+          <Text size="sm" c="dimmed">
+            Call the distribute function to automatically split all 
+            accumulated PYUSD according to the predefined percentages.
           </Text>
         </Card>
       </Group>

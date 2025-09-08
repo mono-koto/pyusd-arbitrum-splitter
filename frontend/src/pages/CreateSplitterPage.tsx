@@ -27,13 +27,14 @@ import {
   useAccount,
   useWriteContract,
   useWaitForTransactionReceipt,
+  useChainId,
 } from "wagmi";
 import { useAppKit } from "@reown/appkit/react";
 import { isAddress, decodeEventLog } from "viem";
 import {
   SIMPLE_SPLITTER_FACTORY_ABI,
-  SIMPLE_SPLITTER_FACTORY_ADDRESS,
 } from "../contracts/SimpleSplitterFactory";
+import { SPLITTER_FACTORY_ADDRESSES } from "../config/splitter";
 
 interface Recipient {
   address: string;
@@ -48,6 +49,7 @@ export function CreateSplitterPage() {
   const { isConnected } = useAccount();
   const { open } = useAppKit();
   const navigate = useNavigate();
+  const chainId = useChainId();
   // const [isCreating, setIsCreating] = useState(false)
 
   const {
@@ -232,7 +234,7 @@ export function CreateSplitterPage() {
       const shares = values.recipients.map((r) => BigInt(r.share));
 
       writeContract({
-        address: SIMPLE_SPLITTER_FACTORY_ADDRESS,
+        address: SPLITTER_FACTORY_ADDRESSES[chainId],
         abi: SIMPLE_SPLITTER_FACTORY_ABI,
         functionName: "createSplitter",
         args: [addresses, shares],

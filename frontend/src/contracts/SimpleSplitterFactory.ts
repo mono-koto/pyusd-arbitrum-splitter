@@ -101,4 +101,3 @@ export const SIMPLE_SPLITTER_FACTORY_ABI = [
   },
 ] as const;
 
-export const SIMPLE_SPLITTER_FACTORY_ADDRESS = "0x5B0aDF5b6cD6E6e7e662F5eB51e165bAE9bcD4a6";
