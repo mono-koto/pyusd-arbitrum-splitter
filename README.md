@@ -41,7 +41,7 @@ Instead of manually calculating splits every day, SimpleSplitter:
 - Testing (unit tests and fork tests)
 - Deployment to Arbitrum testnet (sepoloia) and mainnet (one)
 - Security patterns for token handling
-- Factory pattern for cheap contract cloning (perfect for frontends)
+- Factory pattern for cheap contract cloning
 - A working, deployed frontend
 
 ### What This Repo Does Not Cover:
