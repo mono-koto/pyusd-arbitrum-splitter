@@ -1,3 +1,4 @@
 [tools]
 foundry = "latest"
 just = "latest"
+node = "22"
